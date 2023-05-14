@@ -1,6 +1,6 @@
 # Simple Shell
 
-A custom shell project from Alx SE wrriten in C programming language.
+A custom shell project from Alx SE written in C programming language.
 
 ## Table of Contents
 
