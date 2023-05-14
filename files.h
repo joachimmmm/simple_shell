@@ -5,9 +5,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#define MAX_INPUT_LENGTH 100
 void display_prompt();
-
+void read_input(char *input);
 int main();
 
 #endif

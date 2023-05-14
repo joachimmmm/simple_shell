@@ -8,6 +8,12 @@
 
 int main()
 {
-	display_prompt();
+	char input[MAX_INPUT_LENGTH];
+
+	while (1)
+	{
+		display_prompt();
+		read_input(input);
+	}
 	return 0;
 }
