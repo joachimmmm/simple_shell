@@ -6,18 +6,20 @@
  * Return: 0 (success)
  */
 
-int main()
+int main(void)
 {
 	char input[MAX_INPUT_LENGTH];
+	char *args[2];
+	char *env[] = {NULL};
 
 	while (1)
 	{
 		display_prompt();
-		if (fgets(input, MAX_INPUT_LENGTH, stdin) == NULL)
-		{
-			break;
-		}
 		read_input(input);
+		args[0] = input;
+		args[1] = NULL;
+		execve(input, args, env);
+		perror("execve");
 	}
-	return 0;
+	return (0);
 }
