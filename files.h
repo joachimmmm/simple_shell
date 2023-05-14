@@ -8,4 +8,6 @@
 
 void display_prompt();
 
+int main();
+
 #endif
