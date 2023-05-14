@@ -20,6 +20,11 @@ int main(void)
 		args[1] = NULL;
 		execve(input, args, env);
 		perror("execve");
+		if (feof(stdin))
+		{
+			printf("\n");
+			break;
+		}
 	}
 	return (0);
 }
