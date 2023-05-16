@@ -12,11 +12,11 @@ void display_prompt()
 
 /**
  * read_input - reads the user input
- * @input: the inpu
+ * @input: the input
  * Return: void
  */
 void read_input(char *input)
 {
 	fgets(input, MAX_INPUT_LENGTH, stdin);
-	input[strcspn(input, "\n")] = '\0';
+        input[strcspn(input, "\n")] = '\0';
 }

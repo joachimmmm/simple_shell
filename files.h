@@ -5,6 +5,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 #define MAX_INPUT_LENGTH 100
 
 void display_prompt();
