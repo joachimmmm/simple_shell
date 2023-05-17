@@ -1,5 +1,4 @@
 #include "files.h"
-#include <sys/wait.h>
 /**
  * main - entry point
  *
@@ -8,41 +7,41 @@
 
 int main(void)
 {
-	char input[MAX_INPUT_LENGTH];
-	char *args[2];
-	char *env[] = {NULL};
-	pid_t pid;
-
-	while (1)
-	{
-		display_prompt();
-		if (fgets(input, MAX_INPUT_LENGTH, stdin) == NULL)
-		{
-			printf("\n");
-			break;
-		}
-		read_input(input);
-		pid  = fork();
-		if (pid == -1)
-		{
-			perror("fork");
-			return (0);
-		}
-		else if (pid == 0)
-		{
-			display_prompt();
-			read_input(input);
-			args[0] = input;
-			args[1] = NULL;
-			execve(input, args, env);
-			perror("execve");
-		}
-		else
-		{
-			wait(NULL);
-			display_prompt();
-			read_input(input);
-		}
-	}
-	return (0);
+char command[MAX_COMMAND_LENGTH];
+size_t command_length;
+char *args[2];
+while (1)
+{
+printf("($) ");
+fgets(command, sizeof(command), stdin);
+command_length = strlen(command);
+if (command[command_length - 1] == '\n')
+command[command_length - 1] = '\0';
+if (strcmp(command, "exit") == 0)
+{
+break;
+}
+else
+{
+pid_t pid = fork();
+if (pid < 0)
+{
+perror("Fork failed");
+exit(EXIT_FAILURE);
+}
+else if (pid == 0)
+{
+args[0] = command;
+execve(command, args, NULL);
+perror("Exec failed");
+exit(EXIT_FAILURE);
+}
+else
+{
+int status;
+waitpid(pid, &status, 0);
+}
+}
+}
+return (0);
 }

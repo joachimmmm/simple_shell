@@ -7,8 +7,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-#define MAX_INPUT_LENGTH 100
-
+#define MAX_COMMAND_LENGTH 100
 void display_prompt();
 
 void read_input(char *input);

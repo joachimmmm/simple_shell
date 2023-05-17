@@ -17,6 +17,6 @@ void display_prompt()
  */
 void read_input(char *input)
 {
-	fgets(input, MAX_INPUT_LENGTH, stdin);
+	fgets(input, MAX_COMMAND_LENGTH, stdin);
         input[strcspn(input, "\n")] = '\0';
 }
