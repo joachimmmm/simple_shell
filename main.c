@@ -1,10 +1,8 @@
 #include "files.h"
 /**
  * main - entry point
- *
  * Return: 0 (success)
  */
-
 int main(void)
 {
 	char command[MAX_COMMAND_LENGTH], *args[2];
@@ -12,22 +10,14 @@ int main(void)
 
 	while (1)
 	{
-		printf("($) ");
-		fflush(stdout);
+		print_prompt();
 		if (fgets(command, sizeof(command), stdin) == NULL)
-		{
-			printf("\n");
 			break;
-		}
 		command_length = strlen(command);
-		if (command[command_length - 1] == '\n')
-		{
-			command[command_length - 1] = '\0';
-		}
-		if (strcmp(command, "exit") == 0)
-		{
-			break;
-		}
+			if (command[command_length - 1] == '\n')
+				command[command_length - 1] = '\0';
+			if (strcmp(command, "exit") == 0)
+				break;
 		else
 		{
 			pid_t pid = fork();

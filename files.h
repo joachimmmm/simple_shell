@@ -10,5 +10,5 @@
 #define MAX_COMMAND_LENGTH 100
 
 int main();
-
+void print_prompt(void);
 #endif
