@@ -12,12 +12,17 @@ int main(void)
 	{
 		print_prompt();
 		if (fgets(command, sizeof(command), stdin) == NULL)
+		{
+			printf("\n");
 			break;
+		}
 		command_length = strlen(command);
-			if (command[command_length - 1] == '\n')
-				command[command_length - 1] = '\0';
-			if (strcmp(command, "exit") == 0)
-				break;
+		if (command[command_length - 1] == '\n')
+			command[command_length - 1] = '\0';
+		if (strcmp(command, "exit") == 0)
+		{
+			break;
+		}
 		else
 		{
 			pid_t pid = fork();
@@ -40,6 +45,7 @@ int main(void)
 
 				waitpid(pid, &status, 0);
 			}
+
 		}
 	}
 	return (0);
