@@ -35,8 +35,9 @@ void pidf(char *command, char *args[])
  */
 int main(void)
 {
-	char command[MAX_COMMAND_LENGTH], *args[2];
+	char command[MAX_COMMAND_LENGTH], *args[2], *new_command;
 	size_t command_length;
+	int index;
 
 	while (1)
 	{
@@ -48,7 +49,22 @@ int main(void)
 		}
 		command_length = strlen(command);
 		if (command[command_length - 1] == '\n')
+		{
 			command[command_length - 1] = '\0';
+		}
+		new_command = strtok(command, " ");
+		if (new_command == NULL)
+		{
+			continue;
+		}
+		args[0] = new_command;
+		for (index = 1; index < MAX_COMMAND_LENGTH - 1; index++)
+		{
+			args[index] = strtok(NULL, " ");
+			if (args[index] == NULL)
+				break;
+		}
+		args[index] = NULL;
 		if (strcmp(command, "exit") == 0)
 		{
 			break;
