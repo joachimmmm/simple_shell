@@ -1,5 +1,35 @@
 #include "files.h"
 /**
+ * pidf - id function
+ * @command: input to shell.
+ * @args: arr of arguments
+ * Return: void
+ */
+void pidf(char *command, char *args[])
+{
+	pid_t pid = fork();
+
+	if (pid < 0)
+	{
+		perror("Fork failed");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		args[0] = command;
+		execve(command, args, NULL);
+		perror("Exec failed");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		int status;
+
+		waitpid(pid, &status, 0);
+	}
+}
+
+/**
  * main - entry point
  * Return: 0 (success)
  */
@@ -25,27 +55,7 @@ int main(void)
 		}
 		else
 		{
-			pid_t pid = fork();
-
-			if (pid < 0)
-			{
-				perror("Fork failed");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0)
-			{
-				args[0] = command;
-				execve(command, args, NULL);
-				perror("Exec failed");
-				exit(EXIT_FAILURE);
-			}
-			else
-			{
-				int status;
-
-				waitpid(pid, &status, 0);
-			}
-
+			pidf(command, args);
 		}
 	}
 	return (0);

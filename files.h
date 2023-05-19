@@ -11,5 +11,5 @@
 
 int main();
 void print_prompt(void);
-void pidf(char *command);
+void pidf(char *command, char *args[]);
 #endif
