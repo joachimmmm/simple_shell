@@ -36,43 +36,38 @@ void pidf(char *command, char *args[])
 int main(void)
 {
 	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH],
-	     *new_command, full_path[256];
+	     *new_command;
 	size_t command_length;
 	int index, interactive_mode = isatty(STDIN_FILENO);
 
-	while (1)
 	{
-		if (interactive_mode)
+		while (1)
 		{
-			print_prompt();
-		}
-		if (fgets(command, sizeof(command), stdin) == NULL)
-		{
-			printf("\n");
-			break;
-		}
-		command_length = strlen(command);
-		if (command[command_length - 1] == '\n')
-			command[command_length - 1] = '\0';
-		new_command = strtok(command, " ");
-		if (new_command == NULL)
-			continue;
-		args[0] = new_command;
-		for (index = 1; index < MAX_COMMAND_LENGTH - 1; index++)
-		{
-			args[index] = strtok(NULL, " ");
-			if (args[index] == NULL)
+			if (interactive_mode)
+			{
+				print_prompt();
+			}
+			if (fgets(command, sizeof(command), stdin) == NULL)
+			{
+				printf("\n");
 				break;
+			}
+			command_length = strlen(command);
+			if (command[command_length - 1] == '\n')
+				command[command_length - 1] = '\0';
+			new_command = strtok(command, " ");
+			if (new_command == NULL)
+				continue;
+			args[0] = new_command;
+			for (index = 1; index < MAX_COMMAND_LENGTH - 1; index++)
+			{
+				args[index] = strtok(NULL, " ");
+				if (args[index] == NULL)
+					break;
+			}
+			args[index] = NULL;
+			command_executor(new_command, args);
 		}
-		args[index] = NULL;
-		if (strcmp(command, "exit") == 0)
-			break;
-		else if (strcmp(command, "env") == 0)
-			print_env();
-		else if (check_command_existence(new_command, full_path))
-			pidf(full_path, args);
-		else
-			perror("./shell");
 	}
 	return (0);
 }

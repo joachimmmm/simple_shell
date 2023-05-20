@@ -55,3 +55,31 @@ dir = strtok(NULL, ":");
 free(path_copy);
 return (0);
 }
+
+/**
+ * command_executor - executes commands
+ * @command: input
+ * @args: arr of args
+ * Return: void
+ */
+void command_executor(char *command, char *args[])
+{
+	char full_path[256];
+
+	if (strcmp(command, "exit") == 0)
+	{
+		exit(EXIT_SUCCESS);
+	}
+	else if (strcmp(command, "env") == 0)
+	{
+		print_env();
+	}
+	else if (check_command_existence(command, full_path))
+	{
+		pidf(full_path, args);
+	}
+	else
+	{
+		perror("./shell");
+	}
+}
