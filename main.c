@@ -11,14 +11,14 @@ void pidf(char *command, char *args[])
 
 	if (pid < 0)
 	{
-		perror("Fork failed");
+		perror("./shell");
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
 		args[0] = command;
 		execve(command, args, NULL);
-		perror("Exec failed");
+		perror("./shell");
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -35,7 +35,7 @@ void pidf(char *command, char *args[])
  */
 int main(void)
 {
-	char command[MAX_COMMAND_LENGTH], *args[2], *new_command;
+	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH], *new_command;
 	size_t command_length;
 	int index;
 
@@ -44,7 +44,6 @@ int main(void)
 		print_prompt();
 		if (fgets(command, sizeof(command), stdin) == NULL)
 		{
-			printf("\n");
 			break;
 		}
 		command_length = strlen(command);
@@ -69,9 +68,17 @@ int main(void)
 		{
 			break;
 		}
+		else if (strcmp(command, "env") == 0)
+		{
+			print_env();
+		}
+		else if (check_command_existence(new_command))
+		{
+			pidf(args[0], args);
+		}
 		else
 		{
-			pidf(command, args);
+			perror("./shell");
 		}
 	}
 	return (0);
