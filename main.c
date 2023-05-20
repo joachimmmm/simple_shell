@@ -1,5 +1,26 @@
 #include "files.h"
 /**
+ * input_reader - reads input
+ * @command: input
+ * @command_length: length of input
+ * Return: 1
+ */
+int input_reader(char *command, size_t command_length)
+{
+	if (fgets(command, sizeof(command), stdin) == NULL)
+	{
+		printf("\n");
+		return (0);
+	}
+	command_length = strlen(command);
+	if (command[command_length - 1] == '\n')
+	{
+		command[command_length - 1] = '\0';
+	}
+	return (1);
+}
+
+/**
  * pidf - id function
  * @command: input to shell.
  * @args: arr of arguments
@@ -16,7 +37,7 @@ void pidf(char *command, char *args[])
 	}
 	else if (pid == 0)
 	{
-		args[0] = command;
+		args[3] = command;
 		execve(command, args, NULL);
 		perror("./shell");
 		exit(EXIT_FAILURE);
@@ -36,26 +57,14 @@ void pidf(char *command, char *args[])
 int main(void)
 {
 	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH],
-	     *new_command, full_path[256];
-	size_t command_length;
-	int index, interactive_mode = isatty(STDIN_FILENO);
+	*new_command, full_path[256];
+	int index;
 
 	while (1)
 	{
-		if (interactive_mode)
-		{
-			print_prompt();
-		}
-		if (fgets(command, sizeof(command), stdin) == NULL)
-		{
-			printf("\n");
+		print_prompt();
+		if (!input_reader(command, sizeof(command)))
 			break;
-		}
-		command_length = strlen(command);
-		if (command[command_length - 1] == '\n')
-		{
-			command[command_length - 1] = '\0';
-		}
 		new_command = strtok(command, " ");
 		if (new_command == NULL)
 		{
