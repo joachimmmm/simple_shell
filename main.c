@@ -37,13 +37,17 @@ int main(void)
 {
 	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH], *new_command;
 	size_t command_length;
-	int index;
+	int index, interactive_mode = isatty(STDIN_FILENO);
 
 	while (1)
 	{
-		print_prompt();
+		if (interactive_mode)
+		{
+			print_prompt();
+		}
 		if (fgets(command, sizeof(command), stdin) == NULL)
 		{
+			printf("\n");
 			break;
 		}
 		command_length = strlen(command);
