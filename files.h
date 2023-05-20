@@ -13,5 +13,6 @@ int main();
 void print_prompt(void);
 void pidf(char *command, char *args[]);
 void print_env(void);
-int check_command_existence(char *command);
+int check_command_existence(const char *command, char *full_path);
+extern char **environ;
 #endif

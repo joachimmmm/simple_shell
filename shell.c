@@ -18,7 +18,6 @@ void print_prompt(void)
 
 void print_env(void)
 {
-	extern char **environ;
 	char **env = environ;
 
 	while (*env != NULL)
@@ -29,40 +28,30 @@ void print_env(void)
 }
 
 /**
- * check_command_existence - check if the command exists in the PATH
+ * check_command_existence - check if the command exists
+ * in the PATH and return its full path
  * @command: command to check
+ * @full_path: pointer to store the full path of the command
  * Return: 1 if command exists, 0 otherwise
  */
-int check_command_existence(char *command)
+int check_command_existence(const char *command, char *full_path)
 {
-
 char *path = getenv("PATH");
 char *dir;
 char *path_copy = strdup(path);
 
-if (command[0] == '/')
-{
-return access(command, X_OK) == 0;
-}
 dir = strtok(path_copy, ":");
-
 while (dir != NULL)
 {
-char *full_path = malloc(strlen(dir) + strlen(command) + 2);
 sprintf(full_path, "%s/%s", dir, command);
 
 if (access(full_path, X_OK) == 0)
 {
 free(path_copy);
-free(full_path);
-return 1;
+return (1);
 }
-
-free(full_path);
 dir = strtok(NULL, ":");
 }
-
 free(path_copy);
-return 0;
+return (0);
 }
-

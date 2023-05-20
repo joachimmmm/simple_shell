@@ -35,7 +35,8 @@ void pidf(char *command, char *args[])
  */
 int main(void)
 {
-	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH], *new_command;
+	char command[MAX_COMMAND_LENGTH], *args[MAX_ARGS_LENGTH],
+	     *new_command, full_path[256];
 	size_t command_length;
 	int index, interactive_mode = isatty(STDIN_FILENO);
 
@@ -76,9 +77,9 @@ int main(void)
 		{
 			print_env();
 		}
-		else if (check_command_existence(new_command))
+		else if (check_command_existence(new_command, full_path))
 		{
-			pidf(args[0], args);
+			pidf(full_path, args);
 		}
 		else
 		{
