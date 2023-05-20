@@ -9,8 +9,7 @@
 #include <sys/types.h>
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS_LENGTH 10
-int main(void);
-int input_reader(char *command, size_t command_length);
+int main();
 void print_prompt(void);
 void pidf(char *command, char *args[]);
 void print_env(void);

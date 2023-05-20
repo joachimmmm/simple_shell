@@ -6,13 +6,8 @@
 
 void print_prompt(void)
 {
-	int interactive_mode = isatty(STDIN_FILENO);
-
-	if (interactive_mode)
-	{
-		printf("($) ");
-		fflush(stdout);
-	}
+	printf("($) ");
+	fflush(stdout);
 }
 
 /**
@@ -41,22 +36,22 @@ void print_env(void)
  */
 int check_command_existence(const char *command, char *full_path)
 {
-	char *path = getenv("PATH");
-	char *dir;
-	char *path_copy = strdup(path);
+char *path = getenv("PATH");
+char *dir;
+char *path_copy = strdup(path);
 
-	dir = strtok(path_copy, ":");
-	while (dir != NULL)
-	{
-		sprintf(full_path, "%s/%s", dir, command);
+dir = strtok(path_copy, ":");
+while (dir != NULL)
+{
+sprintf(full_path, "%s/%s", dir, command);
 
-		if (access(full_path, X_OK) == 0)
-		{
-			free(path_copy);
-			return (1);
-		}
-		dir = strtok(NULL, ":");
-	}
-	free(path_copy);
-	return (0);
+if (access(full_path, X_OK) == 0)
+{
+free(path_copy);
+return (1);
+}
+dir = strtok(NULL, ":");
+}
+free(path_copy);
+return (0);
 }
