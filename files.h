@@ -22,6 +22,6 @@ int _strcmp(const char *str1, const char *str2);
 char *_getenv(const char *name);
 char *_strdup(const char *source);
 char *_strncpy(char *destination, const char *source, size_t num);
-int _strncmp(const char* str1, const char* str2, size_t num);
-void print_error(const char *program_name, int line_number, const char *command);
+int _strncmp(const char *str1, const char *str2, size_t num);
+void print_error(const char *program_name, int line, const char *command);
 #endif
