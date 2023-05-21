@@ -30,13 +30,16 @@ void pidf(char *command, char *args[])
 }
 
 /**
- * main - entry point
- * Return: 0 (success)
+ * main - Entry point of the program
+ * @argc: The number of command-line arguments
+ * @argv: An array of command-line arguments
+ *
+ * Return: 0 on success, an error code on failure
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	char *command = NULL, *args[MAX_ARGS_LENGTH], *new_command, full_path[256];
-	size_t command_length;
+	size_t command_length = argc;
 	int index, interactive_mode = isatty(STDIN_FILENO);
 
 	while (1)
@@ -68,7 +71,7 @@ int main(void)
 		else if (check_command_existence(new_command, full_path))
 			pidf(full_path, args);
 		else
-			perror("./shell");
+			print_error(argv[0], __LINE__, args[0]);
 	}
 	return (0);
 }

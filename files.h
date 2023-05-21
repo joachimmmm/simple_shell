@@ -10,7 +10,7 @@
 #include <stddef.h>
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS_LENGTH 10
-int main(void);
+int main(int argc, char *argv[]);
 void print_prompt(void);
 void pidf(char *command, char *args[]);
 void print_env(void);
@@ -23,4 +23,5 @@ char *_getenv(const char *name);
 char *_strdup(const char *source);
 char *_strncpy(char *destination, const char *source, size_t num);
 int _strncmp(const char* str1, const char* str2, size_t num);
+void print_error(const char *program_name, int line_number, const char *command);
 #endif
