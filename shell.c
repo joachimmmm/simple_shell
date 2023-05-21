@@ -6,7 +6,9 @@
 
 void print_prompt(void)
 {
-	printf("($) ");
+	const char *prompt = "($) ";
+
+	write(STDOUT_FILENO, prompt, strlen(prompt));
 	fflush(stdout);
 }
 
@@ -19,10 +21,15 @@ void print_prompt(void)
 void print_env(void)
 {
 	char **env = environ;
+	const char *line;
+	size_t length;
 
 	while (*env != NULL)
 	{
-		printf("%s\n", *env);
+		line = *env;
+		length = strlen(line);
+		write(STDOUT_FILENO, line, length);
+		write(STDOUT_FILENO, "\n", 1);
 		env++;
 	}
 }
@@ -36,50 +43,45 @@ void print_env(void)
  */
 int check_command_existence(const char *command, char *full_path)
 {
-char *path = getenv("PATH");
+char *path = _getenv("PATH");
 char *dir;
-char *path_copy = strdup(path);
+char *path_copy = _strdup(path);
+size_t command_len = _strlen(command);
 
 dir = strtok(path_copy, ":");
 while (dir != NULL)
 {
-sprintf(full_path, "%s/%s", dir, command);
+size_t dir_len = strlen(dir);
+size_t full_path_len = dir_len + 1 + command_len;
+
+_strncpy(full_path, dir, dir_len);
+full_path[dir_len] = '/';
+_strncpy(full_path + dir_len + 1, command, command_len);
+full_path[full_path_len] = '\0';
 
 if (access(full_path, X_OK) == 0)
 {
 free(path_copy);
 return (1);
 }
+
 dir = strtok(NULL, ":");
 }
+
 free(path_copy);
 return (0);
 }
 
 /**
- * command_executor - executes commands
- * @command: input
- * @args: arr of args
- * Return: void
+ * is_full_path - adds a node to the start of the list
+ * @command: user input
+ *
+ * Return: 1 if true 0 if not full path
  */
-void command_executor(char *command, char *args[])
+int is_full_path(char *command)
 {
-	char full_path[256];
-
-	if (strcmp(command, "exit") == 0)
-	{
-		exit(EXIT_SUCCESS);
-	}
-	else if (strcmp(command, "env") == 0)
-	{
-		print_env();
-	}
-	else if (check_command_existence(command, full_path))
-	{
-		pidf(full_path, args);
-	}
-	else
-	{
-		perror("./shell");
-	}
+if (command[0] == '/' || command[0] == '~')
+return (1);
+else
+return (0);
 }
