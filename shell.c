@@ -47,6 +47,7 @@ int check_command_existence(const char *command, char *full_path)
 	char *dir;
 	char *path_copy = _strdup(path);
 	size_t command_len = _strlen(command);
+	int ex = 0;
 
 	dir = strtok(path_copy, ":");
 	while (dir != NULL)
@@ -62,14 +63,14 @@ int check_command_existence(const char *command, char *full_path)
 		if (access(full_path, X_OK) == 0)
 		{
 			
-			free(path_copy);
-			return (1);
+			ex = 1;
+			break;
 		}
 
 		dir = strtok(NULL, ":");
 	}
 	free(path_copy); 
-	return (0);
+	return (ex);
 }
 
 /**

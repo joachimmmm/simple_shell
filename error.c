@@ -15,7 +15,7 @@ void print_error(const char *program_name, int line, const char *command)
 	int line_number_digits = 0;
 	int temp = line;
 	char *p;
-	const char *file_name;
+	const char *file_name, *ls;
 
 	while (temp != 0)
 	{
@@ -34,9 +34,11 @@ void print_error(const char *program_name, int line, const char *command)
 	while (*command != '\0')
 	{
 		if (*command == '/')
-			file_name = command + 1;
+			ls = command;
 		command++;
 	}
+	if (ls != NULL)
+		file_name = ls + 1;
 
 	write(STDERR_FILENO, program_name, program_name_length);
 	write(STDERR_FILENO, ": ", 2);
