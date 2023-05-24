@@ -10,6 +10,7 @@
 #include <stddef.h>
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS_LENGTH 10
+int _putchar(char ch);
 int main(int argc, char *argv[]);
 void print_prompt(void);
 void pidf(char *command, char *args[]);
