@@ -9,9 +9,9 @@
 void print_error(const char *program_name, int line, const char *command)
 {
 const char *error_message = ": not found\n";
-size_t program_name_length = strlen(program_name);
-size_t command_length = strlen(command);
-size_t error_message_length = strlen(error_message);
+size_t program_name_length = _strlen(program_name);
+size_t command_length = _strlen(command);
+size_t error_message_length = _strlen(error_message);
 char line_number_str[16];
 int line_number_digits = 0;
 int temp = line;

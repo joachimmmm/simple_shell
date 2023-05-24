@@ -8,7 +8,7 @@ void print_prompt(void)
 {
 	const char *prompt = "$ ";
 
-	write(STDOUT_FILENO, prompt, strlen(prompt));
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
 	fflush(stdout);
 }
 
@@ -27,7 +27,7 @@ void print_env(void)
 	while (*env != NULL)
 	{
 		line = *env;
-		length = strlen(line);
+		length = _strlen(line);
 		write(STDOUT_FILENO, line, length);
 		write(STDOUT_FILENO, "\n", 1);
 		env++;
@@ -51,7 +51,7 @@ size_t command_len = _strlen(command);
 dir = strtok(path_copy, ":");
 while (dir != NULL)
 {
-size_t dir_len = strlen(dir);
+size_t dir_len = _strlen(dir);
 size_t full_path_len = dir_len + 1 + command_len;
 
 _strncpy(full_path, dir, dir_len);
