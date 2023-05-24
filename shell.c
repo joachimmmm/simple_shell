@@ -48,7 +48,7 @@ int check_command_existence(const char *command, char *full_path)
 	char *path_copy = _strdup(path);
 	size_t command_len = _strlen(command);
 
-	if (command[0] == '.' || command[0] == '/')
+	if (command[0] == '~' || command[0] == '/')
 	{
 		if (access(command, X_OK) == 0)
 		{

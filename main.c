@@ -40,10 +40,11 @@ int main(int argc, char *argv[])
 {
 	char *command = NULL, *args[MAX_ARGS_LENGTH], *new_command, full_path[256],
 	*ptr;
+	bool shell_exit = false;
 	size_t command_length = argc;
 	int index, interactive_mode = isatty(STDIN_FILENO);
 
-	while (1)
+	while (!shell_exit)
 	{
 		if (interactive_mode)
 			print_prompt();
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
 		}
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
-			break;
+			shell_exit = true;
 		else if (_strcmp(command, "env") == 0)
 			print_env();
 		else if (is_full_path(command))
