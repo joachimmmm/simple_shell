@@ -43,33 +43,32 @@ void print_env(void)
  */
 int check_command_existence(const char *command, char *full_path)
 {
-char *path = _getenv("PATH");
-char *dir;
-char *path_copy = _strdup(path);
-size_t command_len = _strlen(command);
+	char *path = _getenv("PATH");
+	char *dir;
+	char *path_copy = _strdup(path);
+	size_t command_len = _strlen(command);
 
-dir = strtok(path_copy, ":");
-while (dir != NULL)
-{
-size_t dir_len = _strlen(dir);
-size_t full_path_len = dir_len + 1 + command_len;
+	dir = strtok(path_copy, ":");
+	while (dir != NULL)
+	{
+		size_t dir_len = _strlen(dir);
+		size_t full_path_len = dir_len + 1 + command_len;
 
-_strncpy(full_path, dir, dir_len);
-full_path[dir_len] = '/';
-_strncpy(full_path + dir_len + 1, command, command_len);
-full_path[full_path_len] = '\0';
+		_strncpy(full_path, dir, dir_len);
+		full_path[dir_len] = '/';
+		_strncpy(full_path + dir_len + 1, command, command_len);
+		full_path[full_path_len] = '\0';
 
-if (access(full_path, X_OK) == 0)
-{
-free(path_copy);
-return (1);
-}
+		if (access(full_path, X_OK) == 0)
+		{
+			free(path_copy);
+			return (1);
+		}
 
-dir = strtok(NULL, ":");
-}
-
-free(path_copy);
-return (0);
+		dir = strtok(NULL, ":");
+	}
+	free(path_copy);
+	return (0);
 }
 
 /**
@@ -80,8 +79,12 @@ return (0);
  */
 int is_full_path(char *command)
 {
-if (command[0] == '/' || command[0] == '~')
-return (1);
-else
-return (0);
+	if (command[0] == '/' || command[0] == '~')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
