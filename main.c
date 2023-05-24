@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 			print_prompt();
 		if (getline(&command, &command_length, stdin) == -1)
 		{
+			_putchar('\n');
 			break;
 		}
 		command_length = _strlen(command);
