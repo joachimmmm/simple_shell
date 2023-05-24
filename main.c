@@ -72,8 +72,7 @@ int main(int argc, char *argv[])
 			pidf(full_path, args);
 		else
 			print_error(argv[0], __LINE__, args[0]);
-
-		free(command);
 	}
+	free(command);
 	return (0);
 }
