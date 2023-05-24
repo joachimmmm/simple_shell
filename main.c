@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 		else if (check_command_existence(new_command, full_path))
 			pidf(full_path, args);
 		else
-			print_error(argv[0], __LINE__, args[0]);
+			print_error(argv[0], __LINE__, "/usr/bin/ls");
 	}
 	free(command);
 	return (EXIT_SUCCESS);
