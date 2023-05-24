@@ -25,6 +25,4 @@ char *_strdup(const char *source);
 char *_strncpy(char *destination, const char *source, size_t num);
 int _strncmp(const char *str1, const char *str2, size_t num);
 void print_error(const char *program_name, int line, const char *command);
-char *trimString(char *str);
-int _isspace(int c);
 #endif

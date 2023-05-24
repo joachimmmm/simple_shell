@@ -38,8 +38,7 @@ void pidf(char *command, char *args[])
  */
 int main(int argc, char *argv[])
 {
-	char *command_t = NULL, *args[MAX_ARGS_LENGTH], *new_command, full_path[256],
-		*command = NULL;
+	char *command = NULL, *args[MAX_ARGS_LENGTH], *new_command, full_path[256];
 	size_t command_length = argc;
 	int index, interactive_mode = isatty(STDIN_FILENO);
 
@@ -47,9 +46,8 @@ int main(int argc, char *argv[])
 	{
 		if (interactive_mode)
 			print_prompt();
-		if (getline(&command_t, &command_length, stdin) == -1)
+		if (getline(&command, &command_length, stdin) == -1)
 			break;
-		command = trimString(command_t);
 		command_length = _strlen(command);
 		if (command[command_length - 1] == '\n')
 			command[command_length - 1] = '\0';
@@ -65,7 +63,7 @@ int main(int argc, char *argv[])
 		}
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
-			exit(2);
+			exit();
 		else if (_strcmp(command, "env") == 0)
 			print_env();
 		else if (is_full_path(command))
