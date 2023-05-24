@@ -78,5 +78,5 @@ int main(int argc, char *argv[])
 			print_error(argv[0], __LINE__, args[0]);
 	}
 	free(command);
-	return (0);
+	return (EXIT_SUCCESS);
 }
