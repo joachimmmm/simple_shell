@@ -17,7 +17,7 @@ void pidf(char *command, char *args[])
 	else if (pid == 0)
 	{
 		args[0] = command;
-		execve(command, args, NULL);
+		execve(command, args, environ);
 		perror("./shell");
 		exit(EXIT_FAILURE);
 	}
