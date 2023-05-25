@@ -62,14 +62,13 @@ int check_command_existence(const char *command, char *full_path)
 
 		if (access(full_path, X_OK) == 0)
 		{
-			
 			ex = 1;
 			break;
 		}
 
 		dir = strtok(NULL, ":");
 	}
-	free(path_copy); 
+	free(path_copy);
 	return (ex);
 }
 
