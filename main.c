@@ -1,22 +1,5 @@
 #include "files.h"
 /**
- * exit_func - exits shell
- * @args: arguments
- * Return: void
- */
-void exit_func(char **args)
-{
-	if (args[1] != NULL)
-	{
-		int exit_status = atoi_func(args[1]);
-		exit(exit_status);
-	}
-	else
-	{
-		exit(0);
-	}
-}
-/**
  * pidf - id function
  * @command: input to shell.
  * @args: arr of arguments
@@ -81,7 +64,7 @@ int main(int argc, char *argv[])
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
 		{
-			exit_func(args);
+			exit(126);
 		}
 		else if (_strcmp(command, "env") == 0)
 			print_env();
