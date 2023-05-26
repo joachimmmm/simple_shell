@@ -12,14 +12,14 @@ void pidf(char *command, char *args[])
 	if (pid < 0)
 	{
 		perror("./shell");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	else if (pid == 0)
 	{
 		args[0] = command;
 		execve(command, args, environ);
 		perror("./shell");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	else
 	{
