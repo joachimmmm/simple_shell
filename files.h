@@ -11,7 +11,6 @@
 #include <stddef.h>
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS_LENGTH 10
-#define BUFFER_SIZE 1024
 int _putchar(char ch);
 int main(int argc, char *argv[]);
 void print_prompt(void);
@@ -28,6 +27,4 @@ char *_strncpy(char *destination, const char *source, size_t num);
 int _strncmp(const char *str1, const char *str2, size_t num);
 void print_error(const char *program_name, int line, const char *command);
 int atoi_func(const char *str);
-void exit_func(char **args);
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 #endif
