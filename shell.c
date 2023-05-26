@@ -92,14 +92,13 @@ int is_full_path(char *command)
 
 
 /**
- * exit_status - handles the exit status
- * @argc: num of args
+ * exit_st - handles the exit status
+ * @b: num of args
  * Return: int(exit status)
  */
-int exit_status(int argc)
+int exit_st(int b)
 {
-	if (argc == 1)
-		return (0);
-	if (argc >= 2)
+	if (b >= 2)
 		return (2);
+	return (0);
 }
