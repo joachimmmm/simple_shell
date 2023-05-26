@@ -27,5 +27,5 @@ char *_strncpy(char *destination, const char *source, size_t num);
 int _strncmp(const char *str1, const char *str2, size_t num);
 void print_error(const char *program_name, int line, const char *command);
 int atoi_func(const char *str);
-int exit_st(int b, char *cmd);
+int exit_st(int b);
 #endif

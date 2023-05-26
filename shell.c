@@ -96,9 +96,9 @@ int is_full_path(char *command)
  * @b: num of args
  * Return: int(exit status)
  */
-int exit_st(int b, char *cmd)
+int exit_st(int b)
 {
-	if (b >= 2 || cmd[0] == '/')
+	if (b >= 2)
 		return (2);
 	return (0);
 }

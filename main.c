@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(command);
-			exit(exit_st(argc, new_command));
+			exit(exit_st(argc));
 		}
 		else if (_strcmp(command, "env") == 0)
 			print_env();
