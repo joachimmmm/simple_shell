@@ -6,20 +6,20 @@
  * Return: void
  */
 void pidf(char *command, char *args[])
-{
+{	
 	pid_t pid = fork();
 
 	if (pid < 0)
 	{
 		perror("./shell");
-		exit(2);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
 		args[0] = command;
 		execve(command, args, environ);
-		perror("./shell");
-		exit(2);
+		perror(command);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -64,11 +64,11 @@ int main(int argc, char *argv[])
 		args[index] = NULL;
 		if (_strcmp(args[0], "exit") == 0)
 		{
-			free(command);
 			if (index > 1)
 			{
 				exit_status = atoi_func(args[1]);
 			}
+			free(command);
 			exit(exit_status);
 		}
 		else if (_strcmp(command, "env") == 0)
