@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 		}
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
-			exit(0);
+			exit(0)Correct output - case: Exit without parameter;
 		else if (_strcmp(command, "env") == 0)
 			print_env();
 		else if (is_full_path(command))
