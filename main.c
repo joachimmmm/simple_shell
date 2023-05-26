@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 		command_length = _strlen(command);
 		if (command[command_length - 1] == '\n')
 			command[command_length - 1] = '\0';
-		new_command = strtok(command, " ");
+		new_command = strtok(command, "|");
 		if (new_command == NULL)
 			continue;
 		args[0] = new_command;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
 			return(EXIT_SUCCESS);
-		else if (_strcmp(command, "env") == 0)
+		else if (_strcmp(args[0], "env") == 0)
 			print_env();
 		else if (is_full_path(command))
 			pidf(command, args);
