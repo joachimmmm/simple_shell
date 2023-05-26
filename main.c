@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 		}
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
-			return(2);
+			return(EXIT_SUCCESS);
 		else if (_strcmp(command, "env") == 0)
 			print_env();
 		else if (is_full_path(command))
