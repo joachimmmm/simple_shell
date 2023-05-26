@@ -12,20 +12,29 @@ void pidf(char *command, char *args[])
 	if (pid < 0)
 	{
 		perror("./shell");
-		exit(0);
+		exit(2);
 	}
 	else if (pid == 0)
 	{
 		args[0] = command;
 		execve(command, args, environ);
 		perror("./shell");
-		exit(0);
+		exit(2);
 	}
 	else
 	{
-		int status;
+		int status, exit_status;
 
 		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			exit_status = WEXITSTATUS(status);
+			if (exit_status != 0)
+			{
+				exit(2);
+			}
+		}
+
 	}
 }
 
