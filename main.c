@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 {
 	char *command = NULL, *args[MAX_ARGS_LENGTH], *new_command, full_path[256];
 	size_t command_length = argc;
-	int index, interactive_mode = isatty(STDIN_FILENO);
+	int index, exit_status = 0, interactive_mode = isatty(STDIN_FILENO);
 
 	while (1)
 	{
@@ -65,7 +65,11 @@ int main(int argc, char *argv[])
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(command);
-			exit(EXIT_SUCCESS);
+			if (index > 1)
+			{
+				exit_status = atoi_func(args[1]);
+			}
+			exit(exit_status);
 		}
 		else if (_strcmp(command, "env") == 0)
 			print_env();
