@@ -89,3 +89,17 @@ int is_full_path(char *command)
 		return (0);
 	}
 }
+
+
+/**
+ * exit_status - handles the exit status
+ * @argc: num of args
+ * Return: int(exit status)
+ */
+int exit_status(int argc)
+{
+	if (argc == 1)
+		return (0);
+	if (argc >= 2)
+		return (2);
+}

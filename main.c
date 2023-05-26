@@ -6,7 +6,7 @@
  * Return: void
  */
 void pidf(char *command, char *args[])
-{	
+{
 	pid_t pid = fork();
 
 	if (pid < 0)
@@ -64,12 +64,8 @@ int main(int argc, char *argv[])
 		args[index] = NULL;
 		if (_strcmp(args[0], "exit") == 0)
 		{
-			if (index > 1)
-			{
-				exit_status = atoi_func(args[1]);
-			}
 			free(command);
-			exit(exit_status);
+			exit(exit_status(argc));
 		}
 		else if (_strcmp(command, "env") == 0)
 			print_env();
