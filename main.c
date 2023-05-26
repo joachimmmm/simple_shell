@@ -23,18 +23,9 @@ void pidf(char *command, char *args[])
 	}
 	else
 	{
-		int status, exit_status;
+		int status;
 
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-		{
-			exit_status = WEXITSTATUS(status);
-			if (exit_status != 0)
-			{
-				exit(2);
-			}
-		}
-
 	}
 }
 

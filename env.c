@@ -12,7 +12,7 @@ char *_getenv(const char *name)
 size_t len;
 char **env;
 
-if (name == NULL || environ == NULL)
+if (name == NULL || *environ == NULL)
 return (NULL);
 
 len = _strlen(name);
