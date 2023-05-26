@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		args[index] = NULL;
 		if (_strcmp(command, "exit") == 0)
 			exit(EXIT_SUCCESS);
-		else if (_strcmp(args[0], "env") == 0)
+		else if (_strcmp(command, "env") == 0)
 			print_env();
 		else if (is_full_path(command))
 			pidf(command, args);
@@ -74,5 +74,5 @@ int main(int argc, char *argv[])
 			print_error(argv[0], __LINE__, command);
 	}
 	free(command);
-	return (EXIT_SUCCESS);
+	return (0);
 }
