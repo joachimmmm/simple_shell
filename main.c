@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 				break;
 		}
 		args[index] = NULL;
-		if (_strcmp(command, "exit") == 0)
+		if (_strcmp(new_command, "exit") == 0)
 			exit(EXIT_SUCCESS);
 		else if (_strcmp(command, "env") == 0)
 			print_env();
