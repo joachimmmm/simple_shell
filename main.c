@@ -71,9 +71,7 @@ int main(int argc, char *argv[])
 		else if (check_command_existence(new_command, full_path))
 			pidf(full_path, args);
 		else
-		{
 			print_error(argv[0], __LINE__, command);
-		}
 	}
 	free(command);
 	return (EXIT_SUCCESS);
