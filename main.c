@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 		if (_strcmp(args[0], "exit") == 0)
 		{
 			free(command);
-			exit(exit_st(argc));
+			exit_program(atoi_func(argv[1]));
 		}
 		else if (_strcmp(command, "env") == 0)
 			print_env();
